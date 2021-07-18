@@ -1,3 +1,5 @@
+import { fakeAsync, flush, tick } from '@angular/core/testing';
+
 describe('Async Testing Examples', () => {
   it('Asynchronous test example with Jasmine done()', (done: DoneFn) => {
     let test = false;
@@ -9,4 +11,18 @@ describe('Async Testing Examples', () => {
       done();
     }, 1000);
   });
+
+  it('Asynchronous test example - setTimeout()', fakeAsync(() => {
+    let test = false;
+
+    setTimeout(() => {});
+
+    setTimeout(() => {
+      test = true;
+    }, 1000);
+
+    flush();
+
+    expect(test).toBeTruthy();
+  }));
 });
